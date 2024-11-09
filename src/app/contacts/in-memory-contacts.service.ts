@@ -25,7 +25,7 @@ export class InMemoryContactsApi implements InMemoryDbService {
         lastName: 'Flungford',
         dateOfBirth: new Date('1988/10/05'),
         favoritesRanking: 0,
-        phone: { phoneNumber: '555-877-5678', phoneType: 'mobile' },
+        phone: { phoneNumber: '555-877-5678', phoneType: 'work' },
         address: {
           streetAddress: '543 Lullaby Lane',
           city: 'Sleepytown',
