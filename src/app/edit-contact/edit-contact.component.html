@@ -19,9 +19,13 @@
           <img src="/assets/plus-grey-blue.png" class="add" />
         </div>
         <div class="radio">
-          <input type="radio" formControlName="phoneType" value="mobile" /> Mobile
+          <!-- before phoneTypeValues decleration -->
+          <!-- <input type="radio" formControlName="phoneType" value="mobile" /> Mobile
           <input type="radio" formControlName="phoneType" value="work" /> Work
-          <input type="radio" formControlName="phoneType" value="other" /> Other
+          <input type="radio" formControlName="phoneType" value="other" /> Other -->
+          <span *ngFor="let phoneType of phoneTypes">
+            <input type="radio" formControlName="phoneType" [value]="phoneType.value" /> {{ phoneType.title }}
+          </span>
         </div>
       </div>
     </section>
@@ -36,10 +40,11 @@
           <input placeholder="City" formControlName="city" />
           <input placeholder="State/Region" formControlName="state" />
           <input placeholder="Zip/Postal Code" formControlName="postalCode" />
-          <select>
-            <option value="home">Home</option>
+          <select formControlName="addressType">
+            <option *ngFor="let addressType of addressTypes" [value]="addressType.value">{{ addressType.title }}</option>
+            <!-- <option value="home">Home</option>
             <option value="work">Work</option>
-            <option value="mobile">Other</option>
+            <option value="mobile">Other</option> -->
           </select>
         </div>
       </div>
