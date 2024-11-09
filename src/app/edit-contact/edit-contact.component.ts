@@ -34,6 +34,7 @@ export class EditContactComponent implements OnInit {
   addressTypes = addressTypeValues;
   contactForm = this.fb.nonNullable.group({
       id : '',
+      personal : false,
       firstName : '',
       lastName : '',
       dateOfBirth : <Date | null> null,
@@ -96,10 +97,11 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact() {
+    console.log(this.contactForm.value.favoritesRanking, typeof this.contactForm.value.favoritesRanking);
     console.log(this.contactForm.value);//gets all info as json object
     //this.contactsService.saveContact(this.contactForm.value); if all contact field is optional like id?, firstName? etc. or we need to assign Contact as partial in the services like Partial<Contact>
     // this.contactsService.saveContact(this.contactForm.value).subscribe({
-      this.contactsService.saveContact(this.contactForm.getRawValue()).subscribe({ // after making phone and address as FormGroup
+    this.contactsService.saveContact(this.contactForm.getRawValue()).subscribe({ // after making phone and address as FormGroup
         //added nonnullable to fb to prevent error
       next: () => this.router.navigate(['/contacts'])
     });
