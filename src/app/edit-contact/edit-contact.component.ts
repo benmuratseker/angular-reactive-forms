@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
 import { addressTypeValues, phoneTypeValues } from '../contacts/contact.model';
+import { restrictedWordsValidator } from '../validators/restricted-words.validators';
 
 @Component({
   templateUrl: './edit-contact.component.html',
@@ -34,6 +35,7 @@ export class EditContactComponent implements OnInit {
   addressTypes = addressTypeValues;
   contactForm = this.fb.nonNullable.group({
       id : '',
+      icon: '',
       personal : false,
       // firstName : new FormControl('', Validators.required), // it it's out of the fb group
       // firstName : ['', Validators.required], // for single validation type
@@ -53,7 +55,8 @@ export class EditContactComponent implements OnInit {
         postalCode :  ['', Validators.required],
         addressType :  ['', Validators.required],
       }),
-      notes: [''],
+      // notes: ['', restrictedWordsValidator],
+      notes: ['', restrictedWordsValidator(['foo', 'boo'])],
     });
 
   // // firstName = new FormControl('Murat'); initial value
@@ -101,8 +104,8 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact() {
-    console.log(this.contactForm.value.favoritesRanking, typeof this.contactForm.value.favoritesRanking);
-    console.log(this.contactForm.value);//gets all info as json object
+    //console.log(this.contactForm.value.favoritesRanking, typeof this.contactForm.value.favoritesRanking);
+    //console.log(this.contactForm.value);//gets all info as json object
     //this.contactsService.saveContact(this.contactForm.value); if all contact field is optional like id?, firstName? etc. or we need to assign Contact as partial in the services like Partial<Contact>
     // this.contactsService.saveContact(this.contactForm.value).subscribe({
     this.contactsService.saveContact(this.contactForm.getRawValue()).subscribe({ // after making phone and address as FormGroup
@@ -119,5 +122,9 @@ export class EditContactComponent implements OnInit {
   //instead of using contactForm.controls.firstName in the template
   get firstName() {
     return this.contactForm.controls.firstName;
+  }
+
+  get notes(){
+    return this.contactForm.controls.notes;
   }
 }
