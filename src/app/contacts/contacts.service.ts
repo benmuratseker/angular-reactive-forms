@@ -11,7 +11,12 @@ export class ContactsService {
   constructor(private http: HttpClient) { }
 
   getContact(id: string): Observable<Contact | undefined> {
-    return this.http.get<Contact>(`api/contacts/${id}`)
+
+    //to use dateofbirth as string
+    //return this.http.get<Contact>(`api/contacts/${id}`)
+      //.pipe(map(c => { c.dateOfBirth = c.dateOfBirth.split('T')[0]; return c })); //gets only date form a datetime info
+
+      return this.http.get<Contact>(`api/contacts/${id}`)
       .pipe(map(c => {
         const dob = c.dateOfBirth ? new Date(c.dateOfBirth) : null;
         return { ...c, dateOfBirth: dob }

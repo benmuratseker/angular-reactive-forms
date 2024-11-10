@@ -4,6 +4,7 @@ export interface Contact {
   firstName: string,
   lastName: string,
   dateOfBirth: Date | null,
+  //dateOfBirth: string, // to use dateofbirth as string
   favoritesRanking: number | null,
   phone: Phone,
   address: Address,

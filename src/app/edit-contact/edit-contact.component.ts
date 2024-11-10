@@ -38,6 +38,7 @@ export class EditContactComponent implements OnInit {
       firstName : '',
       lastName : '',
       dateOfBirth : <Date | null> null,
+      //dateOfBirth : '', //to use dateofbirth as string
       favoritesRanking : <number | null> null,
       phone : this.fb.nonNullable.group({
         phoneNumber :  '',

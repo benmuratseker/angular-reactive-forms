@@ -7,7 +7,9 @@
         <!-- <input [formControl]="firstName" placeholder="First Name" /> -->
         <input formControlName="firstName" placeholder="First Name" />
         <input formControlName="lastName" placeholder="Last Name" />
-        <input formControlName="dateOfBirth" placeholder="Date of Birth" />
+        <input formControlName="dateOfBirth" placeholder="Date of Birth" 
+            type="date"
+            [value]="contactForm.controls.dateOfBirth.value | date:'yyyy-MM-dd'" />
         <div>
           <span>Favorites Ranking </span>
             <input formControlName="favoritesRanking" placeholder="Favorites Ranking" type="range" min="0" max="5"/>
