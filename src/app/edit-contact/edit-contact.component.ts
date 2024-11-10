@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
 import { addressTypeValues, phoneTypeValues } from '../contacts/contact.model';
@@ -35,7 +35,9 @@ export class EditContactComponent implements OnInit {
   contactForm = this.fb.nonNullable.group({
       id : '',
       personal : false,
-      firstName : '',
+      // firstName : new FormControl('', Validators.required), // it it's out of the fb group
+      // firstName : ['', Validators.required], // for single validation type
+      firstName : ['', [Validators.required, Validators.minLength(3)]],
       lastName : '',
       dateOfBirth : <Date | null> null,
       //dateOfBirth : '', //to use dateofbirth as string
@@ -45,13 +47,13 @@ export class EditContactComponent implements OnInit {
         phoneType :  '',
       }),
       address : this.fb.nonNullable.group({
-        streetAddress :  '',
-        city :  '',
-        state :  '',
-        postalCode :  '',
-        addressType :  '',
+        streetAddress :  ['',  Validators.required],
+        city :  ['', Validators.required],
+        state :  ['', Validators.required],
+        postalCode :  ['', Validators.required],
+        addressType :  ['', Validators.required],
       }),
-      notes: '',
+      notes: [''],
     });
 
   // // firstName = new FormControl('Murat'); initial value
@@ -112,5 +114,10 @@ export class EditContactComponent implements OnInit {
     // console.log(this.contactForm.controls.lastName.value);
     // console.log(this.contactForm.controls.dateOfBirth.value);
     // console.log(this.contactForm.controls.favoritesRanking.value);
+  }
+
+  //instead of using contactForm.controls.firstName in the template
+  get firstName() {
+    return this.contactForm.controls.firstName;
   }
 }
