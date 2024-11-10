@@ -49,7 +49,8 @@ export class EditContactComponent implements OnInit {
         state :  '',
         postalCode :  '',
         addressType :  '',
-      })
+      }),
+      notes: '',
     });
 
   // // firstName = new FormControl('Murat'); initial value
